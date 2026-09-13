@@ -1,0 +1,20 @@
+# Secrets - never commit
+backend/.env
+*.env
+!*.env.example
+
+# Dependencies and build output
+node_modules/
+backend/api-node/node_modules/
+__pycache__/
+*.pyc
+db.sqlite3
+build/
+*.o
+*.exe
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

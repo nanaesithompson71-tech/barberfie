@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Admin | BARBERFIE</title>
+  <link rel="stylesheet" href="../landingpage.hmtl/styles.css">
+  <link rel="stylesheet" href="admin.css">
+  <script src="../assets/theme.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../landingpage.hmtl/homepage.html" aria-label="BARBERFIE home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+          <line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/>
+        </svg>
+        <span>BARBER<span class="fie">FIE</span></span><span class="role-tag">Admin</span>
+      </a>
+
+      <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="../landingpage.hmtl/homepage.html">View site</a></li>
+          <li><a href="admin.html" aria-current="page">Admin</a></li>
+          <li class="nav-cta"><button class="btn btn-primary" type="button" data-action="new-booking">+ New Booking</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dash">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="dash-sidebar">
+      <div class="user-chip">
+        <div class="avatar" aria-hidden="true">AB</div>
+        <div>
+          <strong>Ama Boakye</strong>
+          <small>Shop manager</small>
+        </div>
+      </div>
+
+      <nav class="dash-nav" aria-label="Admin sections">
+        <ul>
+          <li><a href="#overview" class="active" data-section="overview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            <span class="txt">Overview</span></a></li>
+          <li><a href="#bookings" data-section="bookings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="txt">Bookings</span></a></li>
+          <li><a href="#customers" data-section="customers">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span class="txt">Customers</span></a></li>
+          <li><a href="#barbers" data-section="barbers">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+            <span class="txt">Barbers</span></a></li>
+          <li><a href="#services" data-section="services">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            <span class="txt">Services</span></a></li>
+          <li><a href="#settings" data-section="settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span class="txt">Shop settings</span></a></li>
+          <li><a href="../auth/login.html" class="logout">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            <span class="txt">Sign out</span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- ================= MAIN ================= -->
+    <main id="main" class="dash-main">
+
+      <!-- ===== Overview ===== -->
+      <section id="overview" class="dash-section active" aria-labelledby="overview-title">
+        <div class="dash-head">
+          <div>
+            <h1 id="overview-title">Today at the shop</h1>
+            <p id="today-label"></p>
+          </div>
+          <button class="btn btn-primary" type="button" data-action="new-booking">+ New Booking</button>
+        </div>
+
+        <div class="stats" role="list">
+          <div class="stat" role="listitem"><div class="label">Today's bookings</div><div class="value" id="st-today">0</div><p class="hint" id="st-today-hint"></p></div>
+          <div class="stat" role="listitem"><div class="label">Revenue today</div><div class="value" id="st-rev">GH₵ 0</div><p class="hint">from completed visits</p></div>
+          <div class="stat" role="listitem"><div class="label">This week</div><div class="value" id="st-week">GH₵ 0</div><p class="hint" id="st-week-hint"></p></div>
+          <div class="stat" role="listitem"><div class="label">Customers</div><div class="value" id="st-cust">0</div><p class="hint" id="st-cust-hint"></p></div>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-head"><h2>Today's schedule</h2><span id="open-status" class="status-badge" aria-live="polite"></span></div>
+            <ul class="schedule" id="today-schedule"></ul>
+          </div>
+          <div>
+            <div class="panel">
+              <div class="panel-head"><h2>Last 7 days</h2><span class="sub" style="color:var(--muted);font-size:0.85rem;">completed visits</span></div>
+              <div class="chart" id="week-chart" role="img" aria-label="Completed visits per day for the last seven days"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><h2>Popular services</h2></div>
+              <ul class="pop" id="popular"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Bookings ===== -->
+      <section id="bookings" class="dash-section" aria-labelledby="bookings-title">
+        <div class="dash-head">
+          <div><h1 id="bookings-title">Bookings</h1><p>Search, filter and update every appointment.</p></div>
+          <button class="btn btn-primary" type="button" data-action="new-booking">+ New Booking</button>
+        </div>
+        <div class="panel">
+          <div class="toolbar">
+            <label class="search">
+              <span class="sr-only" style="position:absolute;left:-9999px;">Search bookings</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" id="bk-search" placeholder="Search by customer, service or barber">
+            </label>
+            <select id="bk-status" aria-label="Filter by status">
+              <option value="">All statuses</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+              <option value="no-show">No-show</option>
+            </select>
+            <select id="bk-range" aria-label="Filter by date">
+              <option value="upcoming">Upcoming</option>
+              <option value="today">Today</option>
+              <option value="week">This week</option>
+              <option value="past">Past</option>
+              <option value="all">All dates</option>
+            </select>
+            <select id="bk-barber" aria-label="Filter by barber"><option value="">All barbers</option></select>
+          </div>
+          <p class="result-count" id="bk-count" aria-live="polite"></p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col"><button type="button" data-sort="date">Date &amp; time</button></th>
+                  <th scope="col"><button type="button" data-sort="customer">Customer</button></th>
+                  <th scope="col">Service</th>
+                  <th scope="col">Barber</th>
+                  <th scope="col" class="num"><button type="button" data-sort="price">Price</button></th>
+                  <th scope="col">Status</th>
+                  <th scope="col"><span style="position:absolute;left:-9999px;">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody id="bk-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Customers ===== -->
+      <section id="customers" class="dash-section" aria-labelledby="customers-title">
+        <div class="dash-head">
+          <div><h1 id="customers-title">Customers</h1><p>Everyone who has booked with BARBERFIE.</p></div>
+          <button class="btn btn-primary" type="button" data-action="new-customer">+ Add Customer</button>
+        </div>
+        <div class="panel">
+          <div class="toolbar">
+            <label class="search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" id="cu-search" placeholder="Search by name, email or phone" aria-label="Search customers">
+            </label>
+          </div>
+          <p class="result-count" id="cu-count" aria-live="polite"></p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Contact</th>
+                  <th scope="col" class="num">Visits</th>
+                  <th scope="col" class="num">Spent</th>
+                  <th scope="col" class="num">Points</th>
+                  <th scope="col">Last visit</th>
+                  <th scope="col"><span style="position:absolute;left:-9999px;">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody id="cu-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Barbers ===== -->
+      <section id="barbers" class="dash-section" aria-labelledby="barbers-title">
+        <div class="dash-head">
+          <div><h1 id="barbers-title">Barbers</h1><p>Manage your team and their working days.</p></div>
+          <button class="btn btn-primary" type="button" data-action="new-barber">+ Add Barber</button>
+        </div>
+        <div class="staff-grid" id="staff-grid"></div>
+      </section>
+
+      <!-- ===== Services ===== -->
+      <section id="services" class="dash-section" aria-labelledby="services-title">
+        <div class="dash-head">
+          <div><h1 id="services-title">Services &amp; pricing</h1><p>Changes here apply to new bookings only.</p></div>
+          <button class="btn btn-primary" type="button" data-action="new-service">+ Add Service</button>
+        </div>
+        <div class="panel">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Service</th>
+                  <th scope="col" class="num">Price</th>
+                  <th scope="col" class="num">Duration</th>
+                  <th scope="col" class="num">Bookings</th>
+                  <th scope="col">Status</th>
+                  <th scope="col"><span style="position:absolute;left:-9999px;">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody id="sv-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Settings ===== -->
+      <section id="settings" class="dash-section" aria-labelledby="settings-title">
+        <div class="dash-head">
+          <div><h1 id="settings-title">Shop settings</h1><p>Opening hours, contact details and booking rules.</p></div>
+        </div>
+
+        <form class="panel" id="hours-form" novalidate>
+          <div class="panel-head"><h2>Opening hours</h2></div>
+          <div class="hours-grid" id="hours-grid">
+            <span class="head">Day</span><span class="head">Opens</span><span class="head">Closes</span><span class="head">Open</span>
+          </div>
+          <div class="form-actions"><button type="submit" class="btn btn-primary">Save hours</button></div>
+        </form>
+
+        <form class="panel" id="shop-form" novalidate>
+          <div class="panel-head"><h2>Shop details</h2></div>
+          <div class="form-grid">
+            <div class="field"><label for="sh-name">Shop name</label><input type="text" id="sh-name" name="name" required><p class="error"></p></div>
+            <div class="field"><label for="sh-phone">Phone / WhatsApp</label><input type="tel" id="sh-phone" name="phone"><p class="error"></p></div>
+            <div class="field"><label for="sh-email">Email</label><input type="email" id="sh-email" name="email"><p class="error"></p></div>
+            <div class="field"><label for="sh-address">Address</label><input type="text" id="sh-address" name="address"><p class="error"></p></div>
+          </div>
+          <div class="form-actions"><button type="submit" class="btn btn-primary">Save details</button></div>
+        </form>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Booking rules</h2></div>
+          <ul class="switch-list">
+            <li><div><strong id="r-walkins">Accept online bookings</strong><span>Turn off to pause the booking form on the website.</span></div>
+              <button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="r-walkins" data-rule="online"></button></li>
+            <li><div><strong id="r-auto">Auto-confirm bookings</strong><span>When off, new bookings wait as pending until you confirm.</span></div>
+              <button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="r-auto" data-rule="autoConfirm"></button></li>
+            <li><div><strong id="r-remind">Send reminders</strong><span>SMS and email 24 hours before each appointment.</span></div>
+              <button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="r-remind" data-rule="reminders"></button></li>
+          </ul>
+        </div>
+
+        <div class="panel danger-zone">
+          <div class="panel-head"><h2>Demo data</h2></div>
+          <p style="color:var(--muted);">This admin panel stores sample data in your browser. Reset it to start over.</p>
+          <button class="btn btn-danger btn-sm" type="button" id="reset-data">Reset demo data</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= BOOKING MODAL ================= -->
+  <dialog class="modal" id="booking-modal" aria-labelledby="bm-title">
+    <form class="modal-body" id="booking-form" novalidate>
+      <h2 id="bm-title">New booking</h2>
+      <p class="sub">Book on behalf of a customer.</p>
+      <div class="field"><label for="bm-customer">Customer</label><select id="bm-customer" name="customer" required></select></div>
+      <div class="field"><label for="bm-service">Service</label><select id="bm-service" name="service" required></select></div>
+      <div class="field"><label for="bm-barber">Barber</label><select id="bm-barber" name="barber" required></select></div>
+      <div class="form-grid">
+        <div class="field"><label for="bm-date">Date</label><input type="date" id="bm-date" name="date" required><p class="error"></p></div>
+        <div class="field"><label for="bm-time">Time</label><select id="bm-time" name="time" required></select><p class="error"></p></div>
+      </div>
+      <div class="field" style="margin-top:1rem;"><label for="bm-status">Status</label>
+        <select id="bm-status" name="status">
+          <option value="confirmed">Confirmed</option><option value="pending">Pending</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option><option value="no-show">No-show</option>
+        </select></div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close>Cancel</button>
+        <button type="submit" class="btn btn-primary" id="bm-submit">Save booking</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ================= CUSTOMER MODAL ================= -->
+  <dialog class="modal" id="customer-modal" aria-labelledby="cm-title">
+    <form class="modal-body" id="customer-form" novalidate>
+      <h2 id="cm-title">Add customer</h2>
+      <p class="sub">Their loyalty points build up automatically from completed visits.</p>
+      <div class="form-grid">
+        <div class="field"><label for="cm-first">First name</label><input type="text" id="cm-first" name="firstName" required><p class="error"></p></div>
+        <div class="field"><label for="cm-last">Last name</label><input type="text" id="cm-last" name="lastName" required><p class="error"></p></div>
+        <div class="field"><label for="cm-email">Email</label><input type="email" id="cm-email" name="email"><p class="error"></p></div>
+        <div class="field"><label for="cm-phone">Phone</label><input type="tel" id="cm-phone" name="phone"><p class="error"></p></div>
+        <div class="field full"><label for="cm-notes">Notes for barbers</label><textarea id="cm-notes" name="notes" rows="2"></textarea></div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close>Cancel</button>
+        <button type="submit" class="btn btn-primary">Save customer</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ================= BARBER MODAL ================= -->
+  <dialog class="modal" id="barber-modal" aria-labelledby="brm-title">
+    <form class="modal-body" id="barber-form" novalidate>
+      <h2 id="brm-title">Add barber</h2>
+      <p class="sub">Working days control which slots customers can book.</p>
+      <div class="field"><label for="brm-name">Full name</label><input type="text" id="brm-name" name="name" required><p class="error"></p></div>
+      <div class="field"><label for="brm-bio">Speciality</label><input type="text" id="brm-bio" name="bio" placeholder="e.g. Fades and beard work"><p class="error"></p></div>
+      <div class="field">
+        <span style="display:block;font-weight:600;font-size:0.9rem;margin-bottom:0.35rem;" id="days-label">Working days</span>
+        <div class="day-picks" role="group" aria-labelledby="days-label" id="day-picks"></div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close>Cancel</button>
+        <button type="submit" class="btn btn-primary">Save barber</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ================= SERVICE MODAL ================= -->
+  <dialog class="modal" id="service-modal" aria-labelledby="sm-title">
+    <form class="modal-body" id="service-form" novalidate>
+      <h2 id="sm-title">Add service</h2>
+      <p class="sub">Prices are in Ghana cedis.</p>
+      <div class="field"><label for="sm-name">Service name</label><input type="text" id="sm-name" name="name" required><p class="error"></p></div>
+      <div class="form-grid">
+        <div class="field"><label for="sm-price">Price (GH₵)</label><input type="number" id="sm-price" name="price" min="0" step="5" required><p class="error"></p></div>
+        <div class="field"><label for="sm-duration">Duration (minutes)</label><input type="number" id="sm-duration" name="duration" min="5" step="5" required><p class="error"></p></div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close>Cancel</button>
+        <button type="submit" class="btn btn-primary">Save service</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ================= CONFIRM MODAL ================= -->
+  <dialog class="modal" id="confirm-modal" aria-labelledby="confirm-title">
+    <div class="modal-body">
+      <h2 id="confirm-title">Are you sure?</h2>
+      <p class="sub" id="confirm-text"></p>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close>Go back</button>
+        <button type="button" class="btn btn-danger" id="confirm-yes">Yes, continue</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="../landingpage.hmtl/script.js"></script>
+  <script src="../assets/api.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

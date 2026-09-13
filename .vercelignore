@@ -1,0 +1,3 @@
+# Keep the backend and scripts out of the Vercel deployment; only the pages are served there.
+backend/
+*.ps1

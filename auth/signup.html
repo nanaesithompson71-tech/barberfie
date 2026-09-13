@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create a BARBERFIE account to book appointments online and earn loyalty rewards.">
+  <title>Create Account | BARBERFIE</title>
+  <link rel="stylesheet" href="../landingpage.hmtl/styles.css">
+  <link rel="stylesheet" href="auth.css">
+  <script src="../assets/theme.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../landingpage.hmtl/homepage.html" aria-label="BARBERFIE home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+          <line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/>
+        </svg>
+        <span>BARBER<span class="fie">FIE</span></span>
+      </a>
+
+      <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="../landingpage.hmtl/homepage.html">Home</a></li>
+          <li><a href="../landingpage.hmtl/homepage.html#services">Services</a></li>
+          <li><a href="../landingpage.hmtl/homepage.html#contact">Contact</a></li>
+          <li><a href="signup.html" aria-current="page">Create Account</a></li>
+          <li class="nav-cta"><a class="btn btn-primary" href="login.html">Sign In</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="auth-page">
+
+    <!-- Brand panel -->
+    <section class="auth-panel" aria-labelledby="panel-title">
+      <p class="hero-eyebrow">Join the chair</p>
+      <h1 id="panel-title">BARBER<span class="fie">FIE</span></h1>
+      <p>Create a free account and book your next cut in under a minute. No queues, no guesswork.</p>
+      <ul>
+        <li>Book and reschedule online, any time</li>
+        <li>Reminders before every appointment</li>
+        <li>Loyalty points and member-only offers</li>
+      </ul>
+    </section>
+
+    <!-- Form -->
+    <section class="auth-form-wrap" aria-labelledby="form-title">
+      <div class="auth-card">
+        <h2 id="form-title">Create your account</h2>
+        <p class="sub">It only takes a moment.</p>
+
+        <form id="signup-form" novalidate>
+          <div class="form-alert" role="alert" aria-live="polite"></div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="signup-first">First name</label>
+              <input type="text" id="signup-first" name="firstName" placeholder="Kwame" autocomplete="given-name" required>
+              <p class="error"></p>
+            </div>
+            <div class="field">
+              <label for="signup-last">Last name</label>
+              <input type="text" id="signup-last" name="lastName" placeholder="Mensah" autocomplete="family-name" required>
+              <p class="error"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="signup-email">Email address</label>
+            <input type="email" id="signup-email" name="email" placeholder="you@example.com" autocomplete="off" data-1p-ignore data-lpignore="true" data-bwignore data-protonpass-ignore="true" required>
+            <p class="error"></p>
+          </div>
+
+          <div class="field">
+            <label for="signup-phone">Phone number</label>
+            <div class="phone-wrap">
+              <select id="signup-country" name="country" aria-label="Country code">
+                <option value="+233" title="Ghana" selected>+233</option>
+                <option value="+234" title="Nigeria">+234</option>
+                <option value="+225" title="Côte d'Ivoire">+225</option>
+                <option value="+228" title="Togo">+228</option>
+                <option value="+226" title="Burkina Faso">+226</option>
+                <option value="+221" title="Senegal">+221</option>
+                <option value="+237" title="Cameroon">+237</option>
+                <option value="+254" title="Kenya">+254</option>
+                <option value="+255" title="Tanzania">+255</option>
+                <option value="+256" title="Uganda">+256</option>
+                <option value="+250" title="Rwanda">+250</option>
+                <option value="+251" title="Ethiopia">+251</option>
+                <option value="+27" title="South Africa">+27</option>
+                <option value="+260" title="Zambia">+260</option>
+                <option value="+263" title="Zimbabwe">+263</option>
+                <option value="+20" title="Egypt">+20</option>
+                <option value="+212" title="Morocco">+212</option>
+                <option value="+44" title="United Kingdom">+44</option>
+                <option value="+1" title="United States / Canada">+1</option>
+                <option value="+33" title="France">+33</option>
+                <option value="+49" title="Germany">+49</option>
+                <option value="+31" title="Netherlands">+31</option>
+                <option value="+39" title="Italy">+39</option>
+                <option value="+34" title="Spain">+34</option>
+                <option value="+971" title="UAE">+971</option>
+                <option value="+966" title="Saudi Arabia">+966</option>
+                <option value="+91" title="India">+91</option>
+                <option value="+86" title="China">+86</option>
+                <option value="+61" title="Australia">+61</option>
+                <option value="+55" title="Brazil">+55</option>
+              </select>
+              <input type="tel" id="signup-phone" name="phone" placeholder="24 000 0000" inputmode="tel" autocomplete="off" data-1p-ignore data-lpignore="true" data-bwignore data-protonpass-ignore="true" required>
+            </div>
+            <p class="error"></p>
+          </div>
+
+          <div class="field">
+            <label for="signup-password">Password</label>
+            <div class="password-wrap">
+              <input type="password" id="signup-password" name="password" placeholder="At least 8 characters" autocomplete="new-password" required>
+              <button type="button" class="toggle-password" data-target="signup-password" aria-pressed="false">Show</button>
+            </div>
+            <p class="strength-text" aria-live="polite"></p>
+            <p class="error"></p>
+          </div>
+
+          <div class="field">
+            <label for="signup-confirm">Confirm password</label>
+            <div class="password-wrap">
+              <input type="password" id="signup-confirm" name="confirm" placeholder="Repeat your password" autocomplete="new-password" required>
+              <button type="button" class="toggle-password" data-target="signup-confirm" aria-pressed="false">Show</button>
+            </div>
+            <p class="error"></p>
+          </div>
+
+          <div class="field">
+            <label class="checkbox">
+              <input type="checkbox" name="terms" required>
+              <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</span>
+            </label>
+            <p class="error"></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+        </form>
+
+        <div class="divider">or sign up with</div>
+
+        <button type="button" class="btn btn-social btn-block" id="google-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#EA4335" d="M12 10.2v3.9h5.5c-.2 1.3-1.6 3.8-5.5 3.8-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.8 3.2 14.6 2.2 12 2.2 6.6 2.2 2.3 6.6 2.3 12S6.6 21.8 12 21.8c5.6 0 9.3-3.9 9.3-9.5 0-.6-.1-1.1-.2-1.6H12z"/>
+          </svg>
+          Google
+        </button>
+
+        <p class="switch-auth">Already have an account? <a href="login.html">Sign in</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> BARBERFIE. All rights reserved.</span>
+        <span><a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../landingpage.hmtl/script.js"></script>
+  <script src="../assets/api.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="auth.js"></script>
+</body>
+</html>

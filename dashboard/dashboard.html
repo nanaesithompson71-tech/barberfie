@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your BARBERFIE dashboard: manage appointments, loyalty points and profile.">
+  <title>My Dashboard | BARBERFIE</title>
+  <link rel="stylesheet" href="../landingpage.hmtl/styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="../assets/theme.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../landingpage.hmtl/homepage.html" aria-label="BARBERFIE home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+          <line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/>
+        </svg>
+        <span>BARBER<span class="fie">FIE</span></span>
+      </a>
+
+      <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="../landingpage.hmtl/homepage.html">Home</a></li>
+          <li><a href="../landingpage.hmtl/homepage.html#services">Services</a></li>
+          <li><a href="../landingpage.hmtl/homepage.html#contact">Contact</a></li>
+          <li><a href="dashboard.html" aria-current="page">Dashboard</a></li>
+          <li class="nav-cta"><button class="btn btn-primary" type="button" data-action="book">Book Now</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dash">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="dash-sidebar">
+      <div class="user-chip">
+        <div class="avatar" id="user-initials" aria-hidden="true">KM</div>
+        <div>
+          <strong id="user-name">Kwame Mensah</strong>
+          <small id="user-email">kwame@example.com</small>
+        </div>
+      </div>
+
+      <nav class="dash-nav" aria-label="Dashboard sections">
+        <ul>
+          <li><a href="#overview" class="active" data-section="overview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            <span class="txt">Overview</span></a></li>
+          <li><a href="#appointments" data-section="appointments">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="txt">Appointments</span></a></li>
+          <li><a href="#loyalty" data-section="loyalty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span class="txt">Loyalty</span></a></li>
+          <li><a href="#profile" data-section="profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="txt">Profile</span></a></li>
+          <li><a href="#settings" data-section="settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span class="txt">Settings</span></a></li>
+          <li class="logout-item"><a href="../auth/login.html" class="logout" id="logout">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            <span class="txt">Sign out</span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- ================= MAIN ================= -->
+    <main id="main" class="dash-main">
+
+      <!-- ===== Overview ===== -->
+      <section id="overview" class="dash-section active" aria-labelledby="overview-title">
+        <div class="dash-head">
+          <div>
+            <h1 id="overview-title">Good day, <span id="greet-name">there</span></h1>
+            <p id="greet-sub">Loading your account...</p>
+          </div>
+          <button class="btn btn-primary" type="button" data-action="book">+ Book Appointment</button>
+        </div>
+
+        <div class="panel next-appt" id="next-appt-panel">
+          <div class="panel-head">
+            <h2>Next appointment</h2>
+            <a href="#appointments" class="panel-link" data-section="appointments">View all</a>
+          </div>
+          <div id="next-appt-body"></div>
+        </div>
+
+        <div class="glance" role="list">
+          <div class="tile" role="listitem">
+            <span class="tile-label">Visits</span>
+            <strong class="tile-value" id="stat-visits">0</strong>
+            <small class="tile-hint">completed cuts</small>
+          </div>
+          <div class="tile" role="listitem">
+            <span class="tile-label">Loyalty points</span>
+            <strong class="tile-value" id="stat-points">0</strong>
+            <small class="tile-hint" id="stat-points-hint"></small>
+          </div>
+          <div class="tile" role="listitem">
+            <span class="tile-label">Your barber</span>
+            <strong class="tile-value tile-text" id="barber-name">-</strong>
+            <small class="tile-hint"><a href="#" id="change-barber">Change</a></small>
+          </div>
+          <div class="tile" role="listitem">
+            <span class="tile-label">Today's hours</span>
+            <strong class="tile-value tile-text" id="today-hours">-</strong>
+            <small class="tile-hint" id="open-status"></small>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Appointments ===== -->
+      <section id="appointments" class="dash-section" aria-labelledby="appts-title">
+        <div class="dash-head">
+          <div>
+            <h1 id="appts-title">Appointments</h1>
+            <p>Reschedule or cancel up to 2 hours before your slot.</p>
+          </div>
+          <button class="btn btn-primary" type="button" data-action="book">+ Book Appointment</button>
+        </div>
+
+        <div class="panel">
+          <div class="tabs" role="tablist" aria-label="Appointment filters">
+            <button class="tab" role="tab" id="tab-upcoming" aria-selected="true" aria-controls="list-upcoming" data-tab="upcoming">Upcoming</button>
+            <button class="tab" role="tab" id="tab-past" aria-selected="false" aria-controls="list-past" data-tab="past" tabindex="-1">Past</button>
+          </div>
+          <div id="list-upcoming" role="tabpanel" aria-labelledby="tab-upcoming">
+            <ul class="appt-list" id="upcoming-list"></ul>
+          </div>
+          <div id="list-past" role="tabpanel" aria-labelledby="tab-past" hidden>
+            <ul class="appt-list" id="past-list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Loyalty ===== -->
+      <section id="loyalty" class="dash-section" aria-labelledby="loyalty-title">
+        <div class="dash-head">
+          <div>
+            <h1 id="loyalty-title">Loyalty rewards</h1>
+            <p>Earn 10 points for every GH₵ 10 spent. Points never expire.</p>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-head"><h2>Your progress</h2></div>
+            <div class="loyalty-ring">
+              <div class="ring" role="img" id="ring" aria-label="Loyalty progress">
+                <svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="52"/><circle class="fill" cx="60" cy="60" r="52" id="ring-fill"/></svg>
+                <div class="ring-text" id="ring-text">0</div>
+              </div>
+              <div>
+                <p style="margin:0;"><strong id="loyalty-points">0 points</strong></p>
+                <p style="margin:0.25rem 0 0;color:var(--muted);" id="loyalty-next">Keep visiting to unlock rewards.</p>
+              </div>
+            </div>
+            <ul class="rewards" id="rewards-list"></ul>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>Points history</h2></div>
+            <ul class="switch-list" id="points-history"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Profile ===== -->
+      <section id="profile" class="dash-section" aria-labelledby="profile-title">
+        <div class="dash-head">
+          <div>
+            <h1 id="profile-title">Profile</h1>
+            <p>Keep your details current so we can reach you about bookings.</p>
+          </div>
+        </div>
+
+        <form class="panel" id="profile-form" novalidate>
+          <div class="panel-head"><h2>Personal details</h2></div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="pf-first">First name</label>
+              <input type="text" id="pf-first" name="firstName" autocomplete="given-name" required>
+              <p class="error"></p>
+            </div>
+            <div class="field">
+              <label for="pf-last">Last name</label>
+              <input type="text" id="pf-last" name="lastName" autocomplete="family-name" required>
+              <p class="error"></p>
+            </div>
+            <div class="field">
+              <label for="pf-email">Email address</label>
+              <input type="email" id="pf-email" name="email" autocomplete="email" required>
+              <p class="error"></p>
+            </div>
+            <div class="field">
+              <label for="pf-phone">Phone number</label>
+              <input type="tel" id="pf-phone" name="phone" autocomplete="tel" placeholder="+233 00 000 0000">
+              <p class="error"></p>
+            </div>
+            <div class="field full">
+              <label for="pf-notes">Cut preferences <span style="color:var(--muted);font-weight:400;">(shown to your barber)</span></label>
+              <textarea id="pf-notes" name="notes" rows="3" placeholder="e.g. Number 2 on the sides, scissor cut on top, keep the beard line natural."></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" id="profile-reset">Discard changes</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+
+        <form class="panel" id="password-form" novalidate>
+          <div class="panel-head"><h2>Change password</h2></div>
+          <div class="form-grid">
+            <div class="field full">
+              <label for="pw-current">Current password</label>
+              <input type="password" id="pw-current" name="current" autocomplete="current-password" required>
+              <p class="error"></p>
+            </div>
+            <div class="field">
+              <label for="pw-new">New password</label>
+              <input type="password" id="pw-new" name="next" autocomplete="new-password" required>
+              <p class="error"></p>
+            </div>
+            <div class="field">
+              <label for="pw-confirm">Confirm new password</label>
+              <input type="password" id="pw-confirm" name="confirm" autocomplete="new-password" required>
+              <p class="error"></p>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Update password</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ===== Settings ===== -->
+      <section id="settings" class="dash-section" aria-labelledby="settings-title">
+        <div class="dash-head">
+          <div>
+            <h1 id="settings-title">Settings</h1>
+            <p>Choose how and when we contact you.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Notifications</h2></div>
+          <ul class="switch-list">
+            <li>
+              <div><strong id="lbl-remind">Appointment reminders</strong><span>SMS and email 24 hours before your slot.</span></div>
+              <button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="lbl-remind" data-pref="reminders"></button>
+            </li>
+            <li>
+              <div><strong id="lbl-promo">Offers and promotions</strong><span>Member-only deals and new services.</span></div>
+              <button class="switch" type="button" role="switch" aria-checked="false" aria-labelledby="lbl-promo" data-pref="promos"></button>
+            </li>
+            <li>
+              <div><strong id="lbl-whatsapp">WhatsApp updates</strong><span>Booking confirmations on WhatsApp instead of SMS.</span></div>
+              <button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="lbl-whatsapp" data-pref="whatsapp"></button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Appearance</h2></div>
+          <ul class="switch-list">
+            <li>
+              <div><strong id="lbl-theme">Light theme</strong><span>Switch between the dark look and a light one. Applies to the whole site on this device.</span></div>
+              <button class="switch" type="button" role="switch" aria-checked="false" aria-labelledby="lbl-theme" id="theme-switch"></button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel danger-zone">
+          <div class="panel-head"><h2>Account</h2></div>
+          <p style="color:var(--muted);">Deleting your account removes your booking history and loyalty points. This cannot be undone.</p>
+          <button class="btn btn-danger btn-sm" type="button" id="delete-account">Delete my account</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= BOOKING MODAL ================= -->
+  <dialog class="modal" id="book-modal" aria-labelledby="book-title">
+    <form method="dialog" class="modal-body" id="book-form" novalidate>
+      <h2 id="book-title">Book an appointment</h2>
+      <p class="sub" id="book-sub">Choose a service, barber, date and time.</p>
+
+      <div class="field">
+        <label for="bk-service">Service</label>
+        <select id="bk-service" name="service" required>
+          <option value="">Loading services...</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="bk-barber">Barber</label>
+        <select id="bk-barber" name="barber">
+          <option value="">Any available barber</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="bk-date">Date</label>
+        <input type="date" id="bk-date" name="date" required>
+        <p class="error"></p>
+      </div>
+
+      <div class="field">
+        <span id="slot-label" style="display:block;font-weight:600;font-size:0.9rem;margin-bottom:0.35rem;">Time</span>
+        <div class="slots" role="group" aria-labelledby="slot-label" id="slots"></div>
+        <input type="hidden" name="time" id="bk-time">
+        <p class="error" id="slot-error"></p>
+      </div>
+
+      <fieldset class="field pay-choice" id="pay-choice">
+        <legend>How would you like to pay?</legend>
+        <label class="pay-option">
+          <input type="radio" name="payment" value="cash" checked>
+          <span><strong>Cash at the shop</strong><small>Pay the barber when you arrive.</small></span>
+        </label>
+        <label class="pay-option" id="pay-option-paystack">
+          <input type="radio" name="payment" value="paystack">
+          <span><strong>Pay now with Paystack</strong><small>Card or mobile money. Secure checkout.</small></span>
+        </label>
+        <p class="hint" id="pay-total"></p>
+      </fieldset>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close>Cancel</button>
+        <button type="submit" class="btn btn-primary" id="book-submit">Confirm booking</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ================= CONFIRM MODAL ================= -->
+  <dialog class="modal" id="confirm-modal" aria-labelledby="confirm-title">
+    <div class="modal-body">
+      <h2 id="confirm-title">Are you sure?</h2>
+      <p class="sub" id="confirm-text"></p>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close>Keep it</button>
+        <button type="button" class="btn btn-danger" id="confirm-yes">Yes, continue</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="../landingpage.hmtl/script.js"></script>
+  <script src="../assets/api.js"></script>
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

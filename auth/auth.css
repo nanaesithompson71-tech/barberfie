@@ -1,0 +1,208 @@
+/* ==========================================================
+   BARBERFIE - auth pages (login / signup)
+   Extends ../landingpage.hmtl/styles.css
+   Theme: matte black, gold/brass accent, slate gray.
+   ========================================================== */
+
+.auth-page {
+  min-height: calc(100vh - 72px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Left: brand panel */
+.auth-panel {
+  background:
+    linear-gradient(135deg, rgba(15,15,15,0.96), rgba(42,47,53,0.88)),
+    repeating-linear-gradient(45deg, #151515 0 12px, #1a1c1f 12px 24px);
+  color: var(--white);
+  padding: clamp(2.5rem, 6vw, 5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid rgba(201,162,74,0.3);
+}
+.auth-panel .hero-eyebrow { margin-bottom: 0.75rem; color: var(--gold); }
+.auth-panel h1 { margin-bottom: 0.75rem; }
+.auth-panel h1 .fie { color: var(--gold); }
+.auth-panel p { color: #d6dadf; max-width: 42ch; }
+.auth-panel ul { list-style: none; padding: 0; margin: 1.5rem 0 0; }
+.auth-panel li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.5rem 0;
+  color: #d6dadf;
+}
+.auth-panel li::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* Right: form */
+.auth-form-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 4rem) 1rem;
+}
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+.auth-card h2 { margin-bottom: 0.25rem; }
+.auth-card .sub { color: var(--muted); margin-bottom: 1.5rem; }
+
+.field { margin-bottom: 1.1rem; }
+.field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+.field input:not([type="checkbox"]) {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--black);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field input::placeholder { color: #6c737b; }
+.field input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,162,74,0.25);
+}
+.field input[aria-invalid="true"] { border-color: #d9534f; }
+.field .error {
+  display: none;
+  color: #e57373;
+  font-size: 0.85rem;
+  margin-top: 0.35rem;
+}
+.field.has-error .error { display: block; }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.password-wrap { position: relative; }
+.password-wrap input { padding-right: 4.2rem; }
+.toggle-password {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--gold);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+}
+.toggle-password:hover, .toggle-password:focus-visible { background: var(--slate-dark); outline: none; }
+
+.form-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+.checkbox {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 400;
+}
+.checkbox input { accent-color: var(--gold); width: 16px; height: 16px; margin-top: 0.2rem; flex-shrink: 0; }
+
+.btn-block { width: 100%; text-align: center; }
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 1.5rem 0;
+}
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+.btn-social {
+  background: var(--slate-dark);
+  color: var(--ink);
+  border-color: var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+.btn-social:hover, .btn-social:focus-visible { border-color: var(--gold); background: var(--slate); }
+.btn-social svg { width: 18px; height: 18px; }
+
+.switch-auth { text-align: center; margin: 1.5rem 0 0; color: var(--muted); font-size: 0.95rem; }
+.switch-auth a { font-weight: 700; }
+
+.form-alert {
+  display: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  border: 1px solid;
+}
+.form-alert.success { display: block; background: rgba(168,134,58,0.15); border-color: var(--brass); color: var(--gold-light); }
+.form-alert.error { display: block; background: rgba(217,83,79,0.12); border-color: #d9534f; color: #e57373; }
+
+
+@media (max-width: 900px) {
+  .auth-page { grid-template-columns: 1fr; }
+  .auth-panel { border-right: 0; border-bottom: 1px solid rgba(201,162,74,0.3); padding: 2.5rem 1.25rem; }
+  .auth-panel ul { display: none; }
+}
+@media (max-width: 480px) {
+  .field-row { grid-template-columns: 1fr; }
+  .auth-card { padding: 1.5rem; }
+}
+
+/* Phone number with country code */
+.phone-wrap { display: flex; gap: 0.5rem; }
+.phone-wrap select {
+  flex: 0 0 auto; max-width: 46%; padding: 0.8rem 0.6rem; font: inherit; color: var(--ink);
+  background: var(--black); border: 1px solid var(--line); border-radius: 8px;
+}
+.phone-wrap select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,162,74,0.25); }
+.phone-wrap input { flex: 1 1 auto; min-width: 0; }
+
+/* Verification code entry (shown after signup) */
+.code-entry { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.code-entry label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.4rem; }
+.code-entry .code-row { display: flex; gap: 0.5rem; }
+.code-entry input {
+  flex: 1 1 auto; min-width: 0; padding: 0.8rem 0.9rem; font: inherit; font-size: 1.4rem; letter-spacing: 0.5em; text-align: center;
+  color: var(--ink); background: var(--black); border: 1px solid var(--line); border-radius: 8px;
+}
+.code-entry input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,162,74,0.25); }
+.code-entry .hint { color: var(--muted); font-size: 0.85rem; margin: 0.5rem 0 0; }
+.code-entry .hint a { cursor: pointer; }
+/* Password warning (shown only while the password is too weak) */
+.strength-text { font-size: 0.85rem; color: #e57373; margin: 0.4rem 0 0; }
+.strength-text:empty { display: none; }

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Verify Email | BARBERFIE</title>
+  <link rel="stylesheet" href="../landingpage.hmtl/styles.css">
+  <link rel="stylesheet" href="auth.css">
+  <script src="../assets/theme.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../landingpage.hmtl/homepage.html" aria-label="BARBERFIE home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+          <line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/>
+        </svg>
+        <span>BARBER<span class="fie">FIE</span></span>
+      </a>
+
+      <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="../landingpage.hmtl/homepage.html">Home</a></li>
+          <li><a href="../landingpage.hmtl/homepage.html#services">Services</a></li>
+          <li><a href="../landingpage.hmtl/homepage.html#contact">Contact</a></li>
+          <li><a href="login.html">Sign In</a></li>
+          <li class="nav-cta"><a class="btn btn-primary" href="signup.html">Create Account</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="auth-page">
+
+    <!-- Brand panel -->
+    <section class="auth-panel" aria-labelledby="panel-title">
+      <p class="hero-eyebrow">Almost there</p>
+      <h1 id="panel-title">BARBER<span class="fie">FIE</span></h1>
+      <p>We are confirming your email address so you can start booking.</p>
+    </section>
+
+    <!-- Status card -->
+    <section class="auth-form-wrap" aria-labelledby="form-title">
+      <div class="auth-card">
+        <h2 id="form-title">Verifying your email</h2>
+        <p class="sub" id="verify-sub">One moment...</p>
+
+        <div class="form-alert" id="verify-alert" role="alert" aria-live="polite"></div>
+
+        <div id="verify-actions" hidden>
+          <a class="btn btn-primary btn-block" id="verify-continue" href="login.html">Go to sign in</a>
+        </div>
+
+        <form id="resend-form" novalidate hidden>
+          <p class="sub">Need a new code or link? Enter the email you signed up with and we will send another.</p>
+          <div class="field">
+            <label for="resend-email">Email address</label>
+            <input type="email" id="resend-email" name="email" placeholder="you@example.com" autocomplete="off" data-1p-ignore data-lpignore="true" data-bwignore data-protonpass-ignore="true" required>
+            <p class="error"></p>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Resend verification email</button>
+        </form>
+
+        <p class="switch-auth">Already verified? <a href="login.html">Sign in</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> BARBERFIE. All rights reserved.</span>
+        <span><a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../landingpage.hmtl/script.js"></script>
+  <script src="../assets/api.js"></script>
+  <script>
+    (function () {
+      'use strict';
+      var alertBox = document.getElementById('verify-alert');
+      var sub = document.getElementById('verify-sub');
+      var title = document.getElementById('form-title');
+      var actions = document.getElementById('verify-actions');
+      var cont = document.getElementById('verify-continue');
+      var resendForm = document.getElementById('resend-form');
+
+      function show(type, msg) { alertBox.className = 'form-alert ' + type; alertBox.textContent = msg; }
+
+      var token = new URLSearchParams(window.location.search).get('token');
+
+      if (!token) {
+        title.textContent = 'Verification link missing';
+        sub.textContent = 'Open the link from your email, or request a new one below.';
+        resendForm.hidden = false;
+      } else {
+        BarberfieAPI.verifyEmail(token).then(function (d) {
+          title.textContent = 'Email verified';
+          sub.textContent = 'Thanks, ' + d.user.firstName + '. Your account has been created.';
+          show('success', 'The device you signed up on is now being taken to your dashboard. You can also continue here.');
+          var dest = d.user.role === 'admin' ? '../admin/admin.html' : '../dashboard/dashboard.html';
+          cont.href = dest; cont.textContent = 'Continue on this device';
+          actions.hidden = false;
+        }).catch(function (err) {
+          title.textContent = 'Could not verify';
+          sub.textContent = '';
+          show('error', err.message);
+          resendForm.hidden = false;
+        });
+      }
+
+      resendForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = resendForm.email.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { show('error', 'Enter a valid email address.'); return; }
+        var btn = resendForm.querySelector('[type="submit"]');
+        btn.disabled = true; btn.textContent = 'Sending...';
+        BarberfieAPI.resendVerification(email).then(function (d) {
+          show('success', d.message);
+          btn.textContent = 'Sent';
+        }).catch(function (err) {
+          show('error', err.message);
+          btn.disabled = false; btn.textContent = 'Resend verification email';
+        });
+      });
+
+      var yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>

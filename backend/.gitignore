@@ -1,0 +1,8 @@
+.env
+node_modules/
+__pycache__/
+*.pyc
+db.sqlite3
+build/
+*.o
+*.exe
