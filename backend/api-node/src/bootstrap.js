@@ -42,13 +42,10 @@ async function bootstrap() {
 }
 
 async function bootstrapOnce() {
-  const cfg = {
-    host: process.env.DB_HOST || '127.0.0.1',
-    port: Number(process.env.DB_PORT) || 3306,
-    user: process.env.DB_USER || 'barberfie',
-    password: process.env.DB_PASSWORD || ''
-  };
-  const dbName = process.env.DB_NAME || 'barberfie';
+  const dbcfg = require('./dbconfig');
+  const cfg = { host: dbcfg.host, port: dbcfg.port, user: dbcfg.user, password: dbcfg.password };
+  const dbName = dbcfg.database;
+  console.log(`[db] Connecting to ${cfg.host}:${cfg.port} as ${cfg.user}, database ${dbName}`);
 
   // 1. Make sure the database exists (needs a connection without a database selected)
   const admin = await mysql.createConnection(cfg);
