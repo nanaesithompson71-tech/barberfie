@@ -16,17 +16,43 @@ function getTransport() {
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT) || 587,
     secure: process.env.SMTP_SECURE === '1',
-    auth: process.env.SMTP_USER ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS } : undefined
+    auth: process.env.SMTP_USER ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS } : undefined,
+    connectionTimeout: 10000,   // fail fast if the host blocks SMTP (some cloud hosts do)
+    greetingTimeout: 10000,
+    socketTimeout: 15000
   });
   return transport;
 }
 
-/** Send an email. Returns a promise. */
+/** Split "Name <addr@x>" into { name, email } for HTTP mail APIs. */
+function parseFrom(raw) {
+  const m = /^(.*?)\s*<([^>]+)>\s*$/.exec(raw || '');
+  return m ? { name: m[1].trim() || 'BARBERFIE', email: m[2].trim() } : { name: 'BARBERFIE', email: (raw || '').trim() };
+}
+
+/** Send through Brevo's HTTP API (works on hosts that block SMTP, e.g. Railway). */
+async function sendViaBrevo({ from, to, subject, text, html }) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 15000);
+  try {
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      signal: ctrl.signal,
+      headers: { 'api-key': process.env.BREVO_API_KEY, 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ sender: parseFrom(from), to: [{ email: to }], subject, textContent: text, htmlContent: html })
+    });
+    if (!res.ok) throw new Error('Brevo rejected the email (' + res.status + '): ' + (await res.text()).slice(0, 200));
+    return res.json();
+  } finally { clearTimeout(timer); }
+}
+
+/** Send an email. Uses Brevo if BREVO_API_KEY is set, else SMTP, else prints to the console. */
 async function sendMail({ to, subject, text, html }) {
   const from = process.env.MAIL_FROM || 'BARBERFIE <no-reply@barberfie.local>';
+  if (process.env.BREVO_API_KEY) return sendViaBrevo({ from, to, subject, text, html });
   const t = getTransport();
   if (!t) {
-    console.log('\n---- EMAIL (SMTP not configured, printing instead) ----');
+    console.log('\n---- EMAIL (no mail provider configured, printing instead) ----');
     console.log('To: ' + to + '\nSubject: ' + subject + '\n\n' + text + '\n-------------------------------------------------------\n');
     return { dev: true };
   }
