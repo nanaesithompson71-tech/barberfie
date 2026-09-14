@@ -52,4 +52,8 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 });
 
 const port = Number(process.env.PORT) || Number(process.env.API_PORT) || 4000;   // hosts like Railway set PORT
-app.listen(port, () => console.log(`BARBERFIE API listening on http://localhost:${port}`));
+
+// Create the tables on first run (empty database), then start listening.
+require('./src/bootstrap').bootstrap()
+  .catch(err => console.error('[db] Setup failed:', err.message))
+  .then(() => app.listen(port, () => console.log(`BARBERFIE API listening on http://localhost:${port}`)));
