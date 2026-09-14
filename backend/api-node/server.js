@@ -6,6 +6,8 @@
 'use strict';
 
 require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
+// Strip stray spaces/line breaks that sneak into values pasted into hosting dashboards
+for (const k of Object.keys(process.env)) if (typeof process.env[k] === 'string') process.env[k] = process.env[k].trim();
 
 const express = require('express');
 const cors = require('cors');

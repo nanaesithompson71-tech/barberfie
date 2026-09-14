@@ -9,6 +9,13 @@
 
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+  /* Already signed in? Skip the sign-in / sign-up pages and go straight to the dashboard. */
+  if (window.BarberfieAPI && BarberfieAPI.isSignedIn() && (document.getElementById('login-form') || document.getElementById('signup-form'))) {
+    var me = BarberfieAPI.getUser();
+    window.location.replace(me && me.role === 'admin' ? '../admin/admin.html' : '../dashboard/dashboard.html');
+    return;
+  }
+
   /* ---------- Show / hide password ---------- */
   document.querySelectorAll('.toggle-password').forEach(function (btn) {
     btn.addEventListener('click', function () {

@@ -311,5 +311,19 @@
   <button class="back-to-top" aria-label="Back to top">&uarr;</button>
 
   <script src="script.js"></script>
+  <script src="../assets/config.js"></script>
+  <script src="../assets/api.js"></script>
+  <script>
+    // Signed-in visitors go straight to their dashboard instead of the sign-in page
+    (function () {
+      if (!window.BarberfieAPI || !BarberfieAPI.isSignedIn()) return;
+      var me = BarberfieAPI.getUser();
+      var dest = me && me.role === 'admin' ? '../admin/admin.html' : '../dashboard/dashboard.html';
+      document.querySelectorAll('a[href="../auth/login.html"]').forEach(function (a) {
+        a.href = dest;
+        if (/sign in/i.test(a.textContent)) a.textContent = 'My Dashboard';
+      });
+    })();
+  </script>
 </body>
 </html>

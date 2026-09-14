@@ -17,7 +17,7 @@ function signToken(user) {
   return jwt.sign(
     { sub: user.id, role: user.role, name: user.first_name },
     process.env.JWT_SECRET || 'dev-secret',
-    { expiresIn: process.env.JWT_EXPIRES || '7d' }
+    { expiresIn: process.env.JWT_EXPIRES || '90d' }   // stay signed in until the user signs out (or 90 days)
   );
 }
 
