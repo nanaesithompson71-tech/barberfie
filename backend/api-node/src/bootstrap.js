@@ -24,7 +24,24 @@ function cleanSql(sql) {
   return sql.replace(/^\s*(CREATE DATABASE|USE |CREATE USER|GRANT |FLUSH PRIVILEGES)[^;]*;/gim, '');
 }
 
+const RETRY_CODES = ['ENOTFOUND', 'ECONNREFUSED', 'ETIMEDOUT', 'EAI_AGAIN', 'ECONNRESET', 'PROTOCOL_CONNECTION_LOST'];
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/** Hosted databases (Railway's private network in particular) can take a few
+    seconds to become reachable after the container starts, so keep trying. */
 async function bootstrap() {
+  const attempts = Number(process.env.DB_CONNECT_ATTEMPTS) || 20;
+  for (let i = 1; i <= attempts; i++) {
+    try { return await bootstrapOnce(); }
+    catch (err) {
+      if (!RETRY_CODES.includes(err.code) || i === attempts) throw err;
+      console.log(`[db] Not reachable yet (${err.code}); retrying in 3s (${i}/${attempts})...`);
+      await sleep(3000);
+    }
+  }
+}
+
+async function bootstrapOnce() {
   const cfg = {
     host: process.env.DB_HOST || '127.0.0.1',
     port: Number(process.env.DB_PORT) || 3306,
