@@ -12,7 +12,8 @@
   var sameOrigin = window.location.port !== '5500';
   var host = window.location.hostname;
   var CONFIG = {
-    api: sameOrigin ? window.location.origin + '/api' : 'http://' + host + ':4000/api',
+    // assets/config.js can set window.BARBERFIE_API_BASE for hosted deployments (Vercel + Railway)
+    api: window.BARBERFIE_API_BASE || (sameOrigin ? window.location.origin + '/api' : 'http://' + host + ':4000/api'),
     php: 'http://' + host + ':8080',                 // PHP public endpoints (hours.php, contact.php, ...)
     reports: 'http://' + host + ':8000/reports'      // Django reports
   };
