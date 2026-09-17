@@ -245,73 +245,100 @@
   /* ==========================================================
      BOOKING FORM (works in both modes)
      ========================================================== */
-  var form = $('#bookForm'), fService = $('#fService'), fBarber = $('#fBarber'), fDate = $('#fDate'), fTime = $('#fTime');
-  var note = $('#formNote'), confirmBox = $('#bookConfirm');
-  var params = new URLSearchParams(location.search);
-  var pre = { service: params.get('service'), barber: params.get('barber') };
-
-  function fillSelects() {
-    fService.innerHTML = SERVICES.map(function (s, i) { return '<option value="' + i + '">' + s.name + ' · GH₵ ' + s.price + '</option>'; }).join('');
-    fBarber.innerHTML = '<option value="">Any barber</option>' + BARBERS.map(function (b, i) { return '<option value="' + i + '">' + b.name + ' · ' + (b.spec || '') + '</option>'; }).join('');
-    if (pre.service !== null) { var si = SERVICES.findIndex(function (s) { return String(s.id) === pre.service || s.name === pre.service; }); if (si >= 0) fService.value = si; }
-    if (pre.barber !== null) { var bi = BARBERS.findIndex(function (b) { return String(b.id) === pre.barber || b.name === pre.barber; }); if (bi >= 0) fBarber.value = bi; }
-  }
-  fillSelects();
-  apiReady.then(fillSelects);
-  var todayIso = new Date().toISOString().slice(0, 10);
-  fDate.min = todayIso;
-
-  function setNote(msg, err) { note.textContent = msg || ''; note.classList.toggle('is-error', !!err); }
-  function defaultSlots(date) {
-    var dow = new Date(date + 'T00:00:00').getDay(), H = { 0: [12, 18], 6: [8, 21] }[dow] || [8, 20], out = [];
-    for (var h = H[0]; h < H[1]; h++) out.push({ time: (h < 10 ? '0' : '') + h + ':00', available: true });
-    return out;
-  }
-  function renderSlots(slots) {
-    var free = slots.filter(function (s) { return s.available !== false; });
-    fTime.innerHTML = free.length ? free.map(function (s) { return '<option value="' + s.time + '">' + (API ? API.to12h(s.time) : s.time) + '</option>'; }).join('') : '<option value="">No free slots that day</option>';
-  }
-  function loadSlots() {
-    var date = fDate.value; if (!date) return;
-    fTime.innerHTML = '<option value="">Checking…</option>';
-    var b = BARBERS[fBarber.value];
-    var p = API ? API.availability(date, b && b.id ? b.id : undefined).then(function (d) { return d.slots || d; }).catch(function () { return null; }) : Promise.resolve(null);
-    p.then(function (slots) { renderSlots(Array.isArray(slots) && slots.length ? slots : defaultSlots(date)); });
-  }
-  fDate.addEventListener('change', loadSlots);
-  fBarber.addEventListener('change', loadSlots);
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var s = SERVICES[fService.value], b = BARBERS[fBarber.value] || null;
-    if (!s || !fDate.value || !fTime.value) { setNote('Pick a service, a date and a time.', true); return; }
-    var summary = s.name + (b ? ' with ' + b.name : '') + ', ' + fDate.value + ' at ' + (API ? API.to12h(fTime.value) : fTime.value);
-    if (!API || !API.isSignedIn()) {
-      var next = location.pathname + '?service=' + encodeURIComponent(s.id || s.name) + (b ? '&barber=' + encodeURIComponent(b.id || b.name) : '') + '#book';
-      setNote('Sign in to hold the chair. Bringing you back here after.');
-      setTimeout(function () { location.href = '../auth/login.html?next=' + encodeURIComponent(next); }, 600);
-      return;
+  if ($('#bookForm')) {
+    var form = $('#bookForm'), fService = $('#fService'), fBarber = $('#fBarber'), fDate = $('#fDate'), fTime = $('#fTime');
+    var note = $('#formNote'), confirmBox = $('#bookConfirm');
+    var params = new URLSearchParams(location.search);
+    var pre = { service: params.get('service'), barber: params.get('barber') };
+  
+    function fillSelects() {
+      fService.innerHTML = SERVICES.map(function (s, i) { return '<option value="' + i + '">' + s.name + ' · GH₵ ' + s.price + '</option>'; }).join('');
+      fBarber.innerHTML = '<option value="">Any barber</option>' + BARBERS.map(function (b, i) { return '<option value="' + i + '">' + b.name + ' · ' + (b.spec || '') + '</option>'; }).join('');
+      if (pre.service !== null) { var si = SERVICES.findIndex(function (s) { return String(s.id) === pre.service || s.name === pre.service; }); if (si >= 0) fService.value = si; }
+      if (pre.barber !== null) { var bi = BARBERS.findIndex(function (b) { return String(b.id) === pre.barber || b.name === pre.barber; }); if (bi >= 0) fBarber.value = bi; }
     }
-    if (!s.id) { setNote('The booking service is offline right now. Call us and we will hold the chair.', true); return; }
-    $('#bookSubmit').disabled = true; setNote('Holding the chair…');
-    API.createBooking({ serviceId: s.id, barberId: b && b.id ? b.id : undefined, date: fDate.value, time: fTime.value })
-      .then(function () {
-        form.hidden = true; confirmBox.hidden = false; $('#confirmSummary').textContent = summary;
-        sign.style.opacity = 1;
-        if (sound.on) sound.snip();
-      })
-      .catch(function (err) { setNote(err.message || 'That did not go through. Try another time.', true); })
-      .then(function () { $('#bookSubmit').disabled = false; });
-  });
+    fillSelects();
+    apiReady.then(fillSelects);
+    var todayIso = new Date().toISOString().slice(0, 10);
+    fDate.min = todayIso;
+  
+    function setNote(msg, err) { note.textContent = msg || ''; note.classList.toggle('is-error', !!err); }
+    function defaultSlots(date) {
+      var dow = new Date(date + 'T00:00:00').getDay(), H = { 0: [12, 18], 6: [8, 21] }[dow] || [8, 20], out = [];
+      for (var h = H[0]; h < H[1]; h++) out.push({ time: (h < 10 ? '0' : '') + h + ':00', available: true });
+      return out;
+    }
+    function renderSlots(slots) {
+      var free = slots.filter(function (s) { return s.available !== false; });
+      fTime.innerHTML = free.length ? free.map(function (s) { return '<option value="' + s.time + '">' + (API ? API.to12h(s.time) : s.time) + '</option>'; }).join('') : '<option value="">No free slots that day</option>';
+    }
+    function loadSlots() {
+      var date = fDate.value; if (!date) return;
+      fTime.innerHTML = '<option value="">Checking…</option>';
+      var b = BARBERS[fBarber.value];
+      var p = API ? API.availability(date, b && b.id ? b.id : undefined).then(function (d) { return d.slots || d; }).catch(function () { return null; }) : Promise.resolve(null);
+      p.then(function (slots) { renderSlots(Array.isArray(slots) && slots.length ? slots : defaultSlots(date)); });
+    }
+    fDate.addEventListener('change', loadSlots);
+    fBarber.addEventListener('change', loadSlots);
+  
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var s = SERVICES[fService.value], b = BARBERS[fBarber.value] || null;
+      if (!s || !fDate.value || !fTime.value) { setNote('Pick a service, a date and a time.', true); return; }
+      var summary = s.name + (b ? ' with ' + b.name : '') + ', ' + fDate.value + ' at ' + (API ? API.to12h(fTime.value) : fTime.value);
+      if (!API || !API.isSignedIn()) {
+        var next = location.pathname + '?service=' + encodeURIComponent(s.id || s.name) + (b ? '&barber=' + encodeURIComponent(b.id || b.name) : '') + '#book';
+        setNote('Sign in to hold the chair. Bringing you back here after.');
+        setTimeout(function () { location.href = '../auth/login.html?next=' + encodeURIComponent(next); }, 600);
+        return;
+      }
+      if (!s.id) { setNote('The booking service is offline right now. Call us and we will hold the chair.', true); return; }
+      $('#bookSubmit').disabled = true; setNote('Holding the chair…');
+      API.createBooking({ serviceId: s.id, barberId: b && b.id ? b.id : undefined, date: fDate.value, time: fTime.value })
+        .then(function () {
+          form.hidden = true; confirmBox.hidden = false; $('#confirmSummary').textContent = summary;
+          sign.style.opacity = 1;
+          if (sound.on) sound.snip();
+        })
+        .catch(function (err) { setNote(err.message || 'That did not go through. Try another time.', true); })
+        .then(function () { $('#bookSubmit').disabled = false; });
+    });
+  
+    /* Deep links from Services and Barbers preselect the form */
+    doc.addEventListener('click', function (e) {
+      var a = e.target.closest('[data-book-service], [data-book-barber]');
+      if (!a) return;
+      if (a.dataset.bookService !== undefined) fService.value = a.dataset.bookService;
+      if (a.dataset.bookBarber !== undefined) fBarber.value = a.dataset.bookBarber;
+      if (fDate.value) loadSlots();
+    });
+  }
 
-  /* Deep links from Services and Barbers preselect the form */
-  doc.addEventListener('click', function (e) {
-    var a = e.target.closest('[data-book-service], [data-book-barber]');
-    if (!a) return;
-    if (a.dataset.bookService !== undefined) fService.value = a.dataset.bookService;
-    if (a.dataset.bookBarber !== undefined) fBarber.value = a.dataset.bookBarber;
-    if (fDate.value) loadSlots();
-  });
+  /* Book a chair: signed-in visitors go straight to their dashboard to book; others sign in first.
+     A service or barber picked higher up the page rides along so the dashboard can preselect it. */
+  (function () {
+    var link = $('[data-book-link]'); if (!link) return;
+    var picked = { service: null, barber: null };
+    function dest() {
+      var signedIn = API && API.isSignedIn(), me = signedIn ? API.getUser() : null;
+      var dash = me && me.role === 'admin' ? '../admin/admin.html' : '../dashboard/dashboard.html';
+      var qs = [];
+      if (picked.service) qs.push('service=' + encodeURIComponent(picked.service));
+      if (picked.barber) qs.push('barber=' + encodeURIComponent(picked.barber));
+      var target = dash + (qs.length ? '?' + qs.join('&') : '');
+      return signedIn ? target : '../auth/login.html?next=' + encodeURIComponent(target);
+    }
+    function refresh() { link.href = dest(); }
+    refresh();
+    if (API && API.isSignedIn()) { var su = $('[data-signup-link]'); if (su) su.hidden = true; }
+    doc.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-book-service], [data-book-barber]'); if (!el) return;
+      if (el.dataset.bookService !== undefined && SERVICES[el.dataset.bookService]) picked.service = SERVICES[el.dataset.bookService].id || SERVICES[el.dataset.bookService].name;
+      if (el.dataset.bookBarber !== undefined && BARBERS[el.dataset.bookBarber]) picked.barber = BARBERS[el.dataset.bookBarber].id || BARBERS[el.dataset.bookBarber].name;
+      refresh();
+    });
+  })();
 
   /* ==========================================================
      SOUND (opt-in): room tone, clipper hum, snip
@@ -550,7 +577,7 @@
     .to('.plate-interior', { opacity: 0, duration: 0.3 }, 0)
     .to({}, { duration: 0.6 });
   bookTl.eventCallback('onUpdate', function () { setIn($('#book-title'), bookTl.progress() > 0.25); });
-  var footerST = ScrollTrigger.create({ trigger: '.footer', start: 'top 80%', end: 'bottom bottom' });
+  var footerST = ScrollTrigger.create({ trigger: '.book-details', start: 'top 90%', end: 'top 40%' });
 
   /* ==========================================================
      THE CHAIR and THE SPOTLIGHT: one function of scroll position

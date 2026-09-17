@@ -207,35 +207,13 @@
     </section>
 
     <section class="book-flow" aria-label="Book your chair">
-      <form class="glass book-panel" id="bookForm" novalidate>
-        <div class="field">
-          <label for="fService">Service</label>
-          <select id="fService" name="service" required></select>
-        </div>
-        <div class="field">
-          <label for="fBarber">Barber</label>
-          <select id="fBarber" name="barber"><option value="">Any barber</option></select>
-        </div>
-        <div class="field">
-          <label for="fDate">Date</label>
-          <input id="fDate" name="date" type="date" required>
-        </div>
-        <div class="field">
-          <label for="fTime">Time</label>
-          <select id="fTime" name="time" required><option value="">Pick a date first</option></select>
-        </div>
-        <p class="form-note" id="formNote" aria-live="polite"></p>
+      <div class="glass book-cta" id="bookCta">
+        <p class="label">Booking takes under a minute</p>
+        <p class="book-cta-text">Sign in, pick your service, barber and time, and the chair is yours.</p>
         <div class="actions">
-          <button class="cta" type="submit" id="bookSubmit" data-magnet>Confirm the chair</button>
-          <a class="ghost" href="tel:+233000000000">Or call us</a>
+          <a class="cta" href="../auth/login.html" data-book-link data-magnet>Book a chair</a>
+          <a class="ghost" href="../auth/signup.html" data-signup-link>New here? Create an account</a>
         </div>
-      </form>
-
-      <div class="book-confirm glass" id="bookConfirm" hidden>
-        <p class="label">Booked</p>
-        <h3 class="display">See you at the chair.</h3>
-        <p id="confirmSummary"></p>
-        <a class="ghost" id="confirmDashboard" href="../dashboard/dashboard.html">Open my bookings</a>
       </div>
 
       <div class="book-details">
