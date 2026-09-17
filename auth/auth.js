@@ -9,10 +9,18 @@
 
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+  /* Where to go after signing in: a relative ?next= link from the page that sent
+     us here (the booking flow), otherwise the dashboard for the user's role.
+     Only same-site relative paths are honoured. */
+  function destinationFor(user) {
+    var next = new URLSearchParams(window.location.search).get('next');
+    if (next && /^(\.\.?\/|[A-Za-z0-9_-])/.test(next) && next.indexOf('//') === -1 && next.indexOf(':') === -1) return next;
+    return user && user.role === 'admin' ? '../admin/admin.html' : '../dashboard/dashboard.html';
+  }
+
   /* Already signed in? Skip the sign-in / sign-up pages and go straight to the dashboard. */
   if (window.BarberfieAPI && BarberfieAPI.isSignedIn() && (document.getElementById('login-form') || document.getElementById('signup-form'))) {
-    var me = BarberfieAPI.getUser();
-    window.location.replace(me && me.role === 'admin' ? '../admin/admin.html' : '../dashboard/dashboard.html');
+    window.location.replace(destinationFor(BarberfieAPI.getUser()));
     return;
   }
 
@@ -86,8 +94,8 @@
       var submitBtn = loginForm.querySelector('[type="submit"]');
       submitBtn.disabled = true; submitBtn.textContent = 'Signing in...';
       BarberfieAPI.login(email.value.trim(), password.value).then(function (d) {
-        showAlert(loginForm, 'success', 'Welcome back, ' + d.user.firstName + '! Taking you to your dashboard...');
-        var dest = d.user.role === 'admin' ? '../admin/admin.html' : '../dashboard/dashboard.html';
+        showAlert(loginForm, 'success', 'Welcome back, ' + d.user.firstName + '! One moment...');
+        var dest = destinationFor(d.user);
         setTimeout(function () { window.location.href = dest; }, 900);
       }).catch(function (err) {
         if (err.code === 'EMAIL_NOT_VERIFIED') {
@@ -148,8 +156,8 @@
 
   /* ---------- Code entry: type the 6-digit code from the email ---------- */
   function goToDashboard(form, user) {
-    showAlert(form, 'success', 'Email verified! Welcome, ' + user.firstName + '. Taking you to your dashboard...');
-    var dest = user.role === 'admin' ? '../admin/admin.html' : '../dashboard/dashboard.html';
+    showAlert(form, 'success', 'Email verified! Welcome, ' + user.firstName + '. One moment...');
+    var dest = destinationFor(user);
     setTimeout(function () { window.location.href = dest; }, 900);
   }
 
@@ -244,9 +252,17 @@
           callback: function (resp) {
             if (!resp || !resp.access_token) { showAlert(activeForm, 'error', 'Google sign-in was cancelled.'); reset(); return; }
             BarberfieAPI.googleLogin(resp.access_token).then(function (d) {
-              showAlert(activeForm, 'success', 'Welcome, ' + d.user.firstName + '! Taking you to your dashboard...');
-              var dest = d.user.role === 'admin' ? '../admin/admin.html' : '../dashboard/dashboard.html';
-              setTimeout(function () { window.location.href = dest; }, 900);
+              if (d.pendingVerification) {
+                // New Google account: confirm the email with the code/link like everyone else
+                showAlert(activeForm, 'success', 'Almost there! We emailed a 6-digit code to ' + d.email + '. Type it below, or click the link in the email.');
+                activeForm.querySelectorAll('input, select').forEach(function (i) { i.disabled = true; });
+                var sb = activeForm.querySelector('[type="submit"]'); if (sb) sb.hidden = true;
+                googleBtn.hidden = true;
+                showCodeEntry(activeForm, d.email);
+                watchPending(activeForm, d.pendingKey);
+                return;
+              }
+              goToDashboard(activeForm, d.user);
             }).catch(function (err) { showAlert(activeForm, 'error', err.message); reset(); });
           },
           error_callback: function () { showAlert(activeForm, 'error', 'Google sign-in was closed before finishing.'); reset(); }

@@ -1,7 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": false,
+  "redirects": [
+    { "source": "/", "destination": "/landingpage.hmtl/chair.html", "permanent": false }
+  ],
   "headers": [
-    { "source": "/(.*)", "headers": [{ "key": "x-content-type-options", "value": "nosniff" }] }
+    { "source": "/(.*)", "headers": [{ "key": "x-content-type-options", "value": "nosniff" }] },
+    { "source": "/landingpage.hmtl/img/(.*)", "headers": [{ "key": "cache-control", "value": "public, max-age=604800" }] }
   ]
 }

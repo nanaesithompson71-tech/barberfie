@@ -1,0 +1,6 @@
+﻿Photo credits for landingpage.hmtl/img (Pexels and Unsplash licences, free to use, no attribution required):
+cut-low-fade, cut-fade-back, cut-fade-clippers, cut-textured-top, cut-afro-shape, cut-crop-comb, cut-line-up: pexels.com/photo/7447146, 7447148, 19140178, 7447120, 7447150, 7447152, 7447151
+cut-distinguished, barber-1, barber-2: pexels.com/photo/7697644, 7697226, 7697390
+cut-blonde-curls: unsplash.com/photos/-sRVfY0f2d8   cut-buzz: unsplash.com/photos/0xqmwDnYnEc   cut-classic-short: unsplash.com/photos/J3mFMkED-vU
+cut-beard-sculpt: unsplash.com/photos/85rUAzBoRSo   cut-beard-waves: unsplash.com/photos/WgH8qCcKwyU   cut-twists-beard: unsplash.com/photos/9KmzY22Tz-4
+barber-3: unsplash.com/photos/_49_L5KmMq4   barber-4: unsplash.com/photos/9ORXOd7g01s
